@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=67.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "timesheetconv"
+version = "0.1.0"
+authors = [{name="Marcus Luck", email="marcus.luck@outlook.com"}]
+description = "A simple tool to clean timesheets into a format that can be used by the time keeping software."
+requires-python = ">=3.9"
+dependencies = [
+    "Flask>=2.3.1",
+    "openai>=0.27.6",
+    "python-dotenv>=1.0.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]

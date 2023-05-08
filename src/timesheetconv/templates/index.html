@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chatbot</title>
+    <style>
+        .spinner {
+            border: 10px solid #f3f3f3; /* Light grey */
+            border-top: 10px solid #3498db; /* Blue */
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <h1>Chatbot</h1>
+    <textarea id="user-input" placeholder="Enter your message"></textarea>
+    <button id="submit-button">Submit</button>
+    <br>
+    <br>
+    <div id="response"><pre></pre></div>
+    <div id="spinner" style="display:none;" class="spinner"></div>
+
+    <script>
+        document.getElementById("submit-button").addEventListener("click", function() {
+            var userInput = document.getElementById("user-input").value;
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/api/chat");
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onloadstart = function() {
+                document.getElementById("spinner").style.display = "block";
+            };
+            xhr.onloadend = function() {
+                document.getElementById("spinner").style.display = "none";
+            };
+            xhr.onload = function() {
+                var response = JSON.parse(xhr.responseText);
+                console.log(response);
+                document.getElementById("response").getElementsByTagName("pre")[0].textContent = response;
+            };
+            xhr.send("user_input=" + userInput);
+        });
+    </script>
+</body>
+</html>
