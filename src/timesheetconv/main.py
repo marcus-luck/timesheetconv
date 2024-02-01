@@ -40,7 +40,7 @@ def chat():
 async def get_chatbot_response(user_input):
     # Set up the OpenAI API request
     response = openai.ChatCompletion.create(
-    model="gpt-3.5-turbo",
+    model="gpt-4",
     messages=[
             {"role": "system", "content": f"You are a conversion system, you convert markdown lists into a comma-separated format that can be easily pasted into Excel, No header in the first row. Format: today's date {date.today().isoformat()} in the first column, the time without the check-mark bullets in the second column, then three empty columns, and the text in the last column. Provide the output as a code block without any additional comments."},
             {"role": "user", "content": """
